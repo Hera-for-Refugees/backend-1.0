@@ -1,0 +1,2963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HeraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="App_Screen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="App_Screen_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="App_Screen_Text">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScreenId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="IsError" Type="bit" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Category_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="MediaTypeId" Type="int" Nullable="false" />
+          <Property Name="FileUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Media" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="OrderNo" Type="int" Nullable="false" />
+          <Property Name="AnswerTypeId" Type="int" Nullable="false" />
+          <Property Name="IsConnected" Type="bit" Nullable="false" />
+          <Property Name="ConnectedQuestionId" Type="int" />
+          <Property Name="ConnectedAnswerId" Type="int" />
+          <Property Name="AnswerDataTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="Category_Question_Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="DataTypeId" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="OrderNo" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CMS_Content">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="OrderNo" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CMS_Content_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="500" />
+          <Property Name="ContentHtml" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CMS_Content_Detail_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="ContentId" Type="int" Nullable="false" />
+          <Property Name="ContentDetailId" Type="int" Nullable="false" />
+          <Property Name="OpenTime" Type="datetime" Nullable="false" />
+          <Property Name="CloseTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Health_Center">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Job" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="ApproveCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApproveDate" Type="datetime" />
+          <Property Name="Platform" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ForgotPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="NotificationUserId" Type="nvarchar" MaxLength="500" />
+          <Property Name="DeviceToken" Type="nvarchar" MaxLength="500" />
+          <Property Name="Language" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Member_Child">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="NameSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Vaccine" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Child_Vaccinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="ChildId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="ReminderTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReminderMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Health_Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="NotificationSentId" Type="int" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="ReadDate" Type="datetime" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Member_Notification_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Pregnancy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime" />
+          <Property Name="ReminderTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReminderMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Question_Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="AnswerId" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="ChildId" Type="int" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinWeek" Type="int" Nullable="false" />
+          <Property Name="MaxWeek" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="IsWeekly" Type="bit" Nullable="false" />
+          <Property Name="AfterBirth" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification_Sent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="int" />
+          <Property Name="NotificationId" Type="int" />
+        </EntityType>
+        <EntityType Name="Notification_Sent_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SentId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="IsoCode" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SLocation_City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneCode" Type="nvarchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="SLocation_Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flag" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SLocation_Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Culture" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Screen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsError" Type="bit" Nullable="false" />
+          <Property Name="IsLabel" Type="bit" Nullable="false" />
+          <Property Name="IsInfo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_Data">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MinWidth" Type="int" Nullable="false" />
+          <Property Name="MinHeight" Type="int" Nullable="false" />
+          <Property Name="IsVideo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_QuestionAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SType_Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FQN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HasTranslation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="RecordId" Type="int" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vaccinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vaccinate_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VaccinateId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Day" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vaccinate_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VaccinateDetailId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="IsWeekly" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_App_Screen_App_Screen_Category">
+          <End Role="App_Screen_Category" Type="Self.App_Screen_Category" Multiplicity="1" />
+          <End Role="App_Screen" Type="Self.App_Screen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_Screen_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_App_Screen_Text_App_Screen">
+          <End Role="App_Screen" Type="Self.App_Screen" Multiplicity="1" />
+          <End Role="App_Screen_Text" Type="Self.App_Screen_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_Screen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen_Text">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_App_Screen_Text_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="App_Screen_Text" Type="Self.App_Screen_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen_Text">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Media_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_Media" Type="Self.Category_Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Media">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Media_SType_Media">
+          <End Role="SType_Media" Type="Self.SType_Media" Multiplicity="1" />
+          <End Role="Category_Media" Type="Self.Category_Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Answer_Category_Question">
+          <End Role="Category_Question" Type="Self.Category_Question" Multiplicity="1" />
+          <End Role="Category_Question_Answer" Type="Self.Category_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question_Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Answer_SType_Data">
+          <End Role="SType_Data" Type="Self.SType_Data" Multiplicity="1" />
+          <End Role="Category_Question_Answer" Type="Self.Category_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Data">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question_Answer">
+              <PropertyRef Name="DataTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_Question" Type="Self.Category_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_SType_QuestionAnswer">
+          <End Role="SType_QuestionAnswer" Type="Self.SType_QuestionAnswer" Multiplicity="1" />
+          <End Role="Category_Question" Type="Self.Category_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_QuestionAnswer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question">
+              <PropertyRef Name="AnswerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_CMS_Content">
+          <End Role="CMS_Content" Type="Self.CMS_Content" Multiplicity="1" />
+          <End Role="CMS_Content_Detail" Type="Self.CMS_Content_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_Log_CMS_Content">
+          <End Role="CMS_Content" Type="Self.CMS_Content" Multiplicity="1" />
+          <End Role="CMS_Content_Detail_Log" Type="Self.CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_Log_CMS_Content_Detail">
+          <End Role="CMS_Content_Detail" Type="Self.CMS_Content_Detail" Multiplicity="1" />
+          <End Role="CMS_Content_Detail_Log" Type="Self.CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content_Detail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="ContentDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_Log_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="CMS_Content_Detail_Log" Type="Self.CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="CMS_Content_Detail" Type="Self.CMS_Content_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Child" Type="Self.Member_Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Vaccinate_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Child_Vaccinate" Type="Self.Member_Child_Vaccinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child_Vaccinate">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Vaccinate_Member_Child">
+          <End Role="Member_Child" Type="Self.Member_Child" Multiplicity="1" />
+          <End Role="Member_Child_Vaccinate" Type="Self.Member_Child_Vaccinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member_Child">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child_Vaccinate">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Health_Record_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Health_Record" Type="Self.Member_Health_Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Health_Record">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Notification_Log" Type="Self.Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_Notification">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="1" />
+          <End Role="Member_Notification_Log" Type="Self.Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_SType_Notification">
+          <End Role="SType_Notification" Type="Self.SType_Notification" Multiplicity="1" />
+          <End Role="Member_Notification_Log" Type="Self.Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Notification" Type="Self.Member_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Notification_Sent">
+          <End Role="Notification_Sent" Type="Self.Notification_Sent" Multiplicity="1" />
+          <End Role="Member_Notification" Type="Self.Member_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification_Sent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification">
+              <PropertyRef Name="NotificationSentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Pregnancy_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Pregnancy" Type="Self.Member_Pregnancy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Pregnancy">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Member_Question_Answer" Type="Self.Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Category_Question">
+          <End Role="Category_Question" Type="Self.Category_Question" Multiplicity="1" />
+          <End Role="Member_Question_Answer" Type="Self.Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Member_Question_Answer" Type="Self.Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Message_Notification">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="1" />
+          <End Role="Notification_Message" Type="Self.Notification_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Message">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Message_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="Notification_Message" Type="Self.Notification_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Message">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Sent_Detail_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="Notification_Sent_Detail" Type="Self.Notification_Sent_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Sent_Detail">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_SType_Notification">
+          <End Role="SType_Notification" Type="Self.SType_Notification" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLocation_City_SLocation_Country">
+          <End Role="SLocation_Country" Type="Self.SLocation_Country" Multiplicity="1" />
+          <End Role="SLocation_City" Type="Self.SLocation_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLocation_Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SLocation_City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLocation_Region_SLocation_City">
+          <End Role="SLocation_City" Type="Self.SLocation_City" Multiplicity="1" />
+          <End Role="SLocation_Region" Type="Self.SLocation_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLocation_City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SLocation_Region">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SResource_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="SResource" Type="Self.SResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SResource">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_SType_Table">
+          <End Role="SType_Table" Type="Self.SType_Table" Multiplicity="1" />
+          <End Role="Translation" Type="Self.Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Detail_Vaccinate">
+          <End Role="Vaccinate" Type="Self.Vaccinate" Multiplicity="1" />
+          <End Role="Vaccinate_Detail" Type="Self.Vaccinate_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccinate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Detail">
+              <PropertyRef Name="VaccinateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Message_SLanguage">
+          <End Role="SLanguage" Type="Self.SLanguage" Multiplicity="1" />
+          <End Role="Vaccinate_Message" Type="Self.Vaccinate_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Message">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Message_Vaccinate_Detail">
+          <End Role="Vaccinate_Detail" Type="Self.Vaccinate_Detail" Multiplicity="1" />
+          <End Role="Vaccinate_Message" Type="Self.Vaccinate_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccinate_Detail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Message">
+              <PropertyRef Name="VaccinateDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_Get_Member_Calendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Manage_Dashboard_AVG_Child" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Manage_Dashboard_Member_Age" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Mobile_Member_Language_Change" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Mobile_NearByHealthCenter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Latitude" Type="float" Mode="In" />
+          <Parameter Name="Longitude" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_Mobile_Translation_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LanguageId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Notification_Job_ChildVaccinate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Notification_Job_RutineMessages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_Set_Child_Vaccinate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ChildId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Set_Member_Pregnancy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberId" Type="int" Mode="In" />
+          <Parameter Name="LastDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_Update_Child_Vaccinate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ChildId" Type="int" Mode="In" />
+          <Parameter Name="OldName" Type="nvarchar" Mode="In" />
+          <Parameter Name="NewName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Birthdate" Type="datetime" Mode="In" />
+          <Parameter Name="NameIsChanged" Type="bit" Mode="In" />
+          <Parameter Name="BirthdateIsChanged" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="HeraModelStoreContainer">
+          <EntitySet Name="App_Screen" EntityType="Self.App_Screen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="App_Screen_Category" EntityType="Self.App_Screen_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="App_Screen_Text" EntityType="Self.App_Screen_Text" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Media" EntityType="Self.Category_Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Question" EntityType="Self.Category_Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Question_Answer" EntityType="Self.Category_Question_Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CMS_Content" EntityType="Self.CMS_Content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CMS_Content_Detail" EntityType="Self.CMS_Content_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CMS_Content_Detail_Log" EntityType="Self.CMS_Content_Detail_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Health_Center" EntityType="Self.Health_Center" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Child" EntityType="Self.Member_Child" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Child_Vaccinate" EntityType="Self.Member_Child_Vaccinate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Health_Record" EntityType="Self.Member_Health_Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Notification" EntityType="Self.Member_Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Notification_Log" EntityType="Self.Member_Notification_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Pregnancy" EntityType="Self.Member_Pregnancy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Question_Answer" EntityType="Self.Member_Question_Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification_Message" EntityType="Self.Notification_Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification_Sent" EntityType="Self.Notification_Sent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification_Sent_Detail" EntityType="Self.Notification_Sent_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLanguage" EntityType="Self.SLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLocation_City" EntityType="Self.SLocation_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLocation_Country" EntityType="Self.SLocation_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLocation_Region" EntityType="Self.SLocation_Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SResource" EntityType="Self.SResource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_Data" EntityType="Self.SType_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_Media" EntityType="Self.SType_Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_Menu" EntityType="Self.SType_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_Notification" EntityType="Self.SType_Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_QuestionAnswer" EntityType="Self.SType_QuestionAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SType_Table" EntityType="Self.SType_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUser" EntityType="Self.SUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccinate" EntityType="Self.Vaccinate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccinate_Detail" EntityType="Self.Vaccinate_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccinate_Message" EntityType="Self.Vaccinate_Message" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_App_Screen_App_Screen_Category" Association="Self.FK_App_Screen_App_Screen_Category">
+            <End Role="App_Screen_Category" EntitySet="App_Screen_Category" />
+            <End Role="App_Screen" EntitySet="App_Screen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_App_Screen_Text_App_Screen" Association="Self.FK_App_Screen_Text_App_Screen">
+            <End Role="App_Screen" EntitySet="App_Screen" />
+            <End Role="App_Screen_Text" EntitySet="App_Screen_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_App_Screen_Text_SLanguage" Association="Self.FK_App_Screen_Text_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="App_Screen_Text" EntitySet="App_Screen_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Media_Category" Association="Self.FK_Category_Media_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Media" EntitySet="Category_Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Media_SType_Media" Association="Self.FK_Category_Media_SType_Media">
+            <End Role="SType_Media" EntitySet="SType_Media" />
+            <End Role="Category_Media" EntitySet="Category_Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Answer_Category_Question" Association="Self.FK_Category_Question_Answer_Category_Question">
+            <End Role="Category_Question" EntitySet="Category_Question" />
+            <End Role="Category_Question_Answer" EntitySet="Category_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Answer_SType_Data" Association="Self.FK_Category_Question_Answer_SType_Data">
+            <End Role="SType_Data" EntitySet="SType_Data" />
+            <End Role="Category_Question_Answer" EntitySet="Category_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Category" Association="Self.FK_Category_Question_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Question" EntitySet="Category_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_SType_QuestionAnswer" Association="Self.FK_Category_Question_SType_QuestionAnswer">
+            <End Role="SType_QuestionAnswer" EntitySet="SType_QuestionAnswer" />
+            <End Role="Category_Question" EntitySet="Category_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_CMS_Content" Association="Self.FK_CMS_Content_Detail_CMS_Content">
+            <End Role="CMS_Content" EntitySet="CMS_Content" />
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_CMS_Content" Association="Self.FK_CMS_Content_Detail_Log_CMS_Content">
+            <End Role="CMS_Content" EntitySet="CMS_Content" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_CMS_Content_Detail" Association="Self.FK_CMS_Content_Detail_Log_CMS_Content_Detail">
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_Member" Association="Self.FK_CMS_Content_Detail_Log_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_SLanguage" Association="Self.FK_CMS_Content_Detail_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Member" Association="Self.FK_Member_Child_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Child" EntitySet="Member_Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Vaccinate_Member" Association="Self.FK_Member_Child_Vaccinate_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Child_Vaccinate" EntitySet="Member_Child_Vaccinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Vaccinate_Member_Child" Association="Self.FK_Member_Child_Vaccinate_Member_Child">
+            <End Role="Member_Child" EntitySet="Member_Child" />
+            <End Role="Member_Child_Vaccinate" EntitySet="Member_Child_Vaccinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Health_Record_Member" Association="Self.FK_Member_Health_Record_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Health_Record" EntitySet="Member_Health_Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_Member" Association="Self.FK_Member_Notification_Log_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_Notification" Association="Self.FK_Member_Notification_Log_Notification">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_SType_Notification" Association="Self.FK_Member_Notification_Log_SType_Notification">
+            <End Role="SType_Notification" EntitySet="SType_Notification" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Member" Association="Self.FK_Member_Notification_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Notification" EntitySet="Member_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Notification_Sent" Association="Self.FK_Member_Notification_Notification_Sent">
+            <End Role="Notification_Sent" EntitySet="Notification_Sent" />
+            <End Role="Member_Notification" EntitySet="Member_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Pregnancy_Member" Association="Self.FK_Member_Pregnancy_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Pregnancy" EntitySet="Member_Pregnancy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Category" Association="Self.FK_Member_Question_Answer_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Category_Question" Association="Self.FK_Member_Question_Answer_Category_Question">
+            <End Role="Category_Question" EntitySet="Category_Question" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Member" Association="Self.FK_Member_Question_Answer_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Message_Notification" Association="Self.FK_Notification_Message_Notification">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="Notification_Message" EntitySet="Notification_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Message_SLanguage" Association="Self.FK_Notification_Message_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Notification_Message" EntitySet="Notification_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Sent_Detail_SLanguage" Association="Self.FK_Notification_Sent_Detail_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Notification_Sent_Detail" EntitySet="Notification_Sent_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_SType_Notification" Association="Self.FK_Notification_SType_Notification">
+            <End Role="SType_Notification" EntitySet="SType_Notification" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLocation_City_SLocation_Country" Association="Self.FK_SLocation_City_SLocation_Country">
+            <End Role="SLocation_Country" EntitySet="SLocation_Country" />
+            <End Role="SLocation_City" EntitySet="SLocation_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLocation_Region_SLocation_City" Association="Self.FK_SLocation_Region_SLocation_City">
+            <End Role="SLocation_City" EntitySet="SLocation_City" />
+            <End Role="SLocation_Region" EntitySet="SLocation_Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SResource_SLanguage" Association="Self.FK_SResource_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="SResource" EntitySet="SResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_SLanguage" Association="Self.FK_Translation_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_SType_Table" Association="Self.FK_Translation_SType_Table">
+            <End Role="SType_Table" EntitySet="SType_Table" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Detail_Vaccinate" Association="Self.FK_Vaccinate_Detail_Vaccinate">
+            <End Role="Vaccinate" EntitySet="Vaccinate" />
+            <End Role="Vaccinate_Detail" EntitySet="Vaccinate_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Message_SLanguage" Association="Self.FK_Vaccinate_Message_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Vaccinate_Message" EntitySet="Vaccinate_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Message_Vaccinate_Detail" Association="Self.FK_Vaccinate_Message_Vaccinate_Detail">
+            <End Role="Vaccinate_Detail" EntitySet="Vaccinate_Detail" />
+            <End Role="Vaccinate_Message" EntitySet="Vaccinate_Message" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HeraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HeraEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_Mobile_Translation_List" ReturnType="Collection(HeraModel.sp_Mobile_Translation_List_Result)">
+          <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mobile_NearByHealthCenter" ReturnType="Collection(HeraModel.sp_Mobile_NearByHealthCenter_Result)">
+            <Parameter Name="Latitude" Mode="In" Type="Double" />
+            <Parameter Name="Longitude" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Notification_Job_RutineMessages" ReturnType="Collection(HeraModel.sp_Notification_Job_RutineMessages_Result)" />
+          <FunctionImport Name="sp_Set_Child_Vaccinate">
+          <Parameter Name="ChildId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Update_Child_Vaccinate">
+            <Parameter Name="ChildId" Mode="In" Type="Int32" />
+            <Parameter Name="OldName" Mode="In" Type="String" />
+            <Parameter Name="NewName" Mode="In" Type="String" />
+            <Parameter Name="Birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="NameIsChanged" Mode="In" Type="Boolean" />
+            <Parameter Name="BirthdateIsChanged" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Set_Member_Pregnancy">
+            <Parameter Name="MemberId" Mode="In" Type="Int32" />
+            <Parameter Name="LastDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="App_Screen" EntityType="HeraModel.App_Screen" />
+          <EntitySet Name="App_Screen_Category" EntityType="HeraModel.App_Screen_Category" />
+          <EntitySet Name="App_Screen_Text" EntityType="HeraModel.App_Screen_Text" />
+          <EntitySet Name="Category" EntityType="HeraModel.Category" />
+          <EntitySet Name="Category_Media" EntityType="HeraModel.Category_Media" />
+          <EntitySet Name="Category_Question" EntityType="HeraModel.Category_Question" />
+          <EntitySet Name="Category_Question_Answer" EntityType="HeraModel.Category_Question_Answer" />
+          <EntitySet Name="CMS_Content" EntityType="HeraModel.CMS_Content" />
+          <EntitySet Name="CMS_Content_Detail" EntityType="HeraModel.CMS_Content_Detail" />
+          <EntitySet Name="Health_Center" EntityType="HeraModel.Health_Center" />
+          <EntitySet Name="Member" EntityType="HeraModel.Member" />
+          <EntitySet Name="Member_Child" EntityType="HeraModel.Member_Child" />
+          <EntitySet Name="Member_Child_Vaccinate" EntityType="HeraModel.Member_Child_Vaccinate" />
+          <EntitySet Name="Member_Health_Record" EntityType="HeraModel.Member_Health_Record" />
+          <EntitySet Name="Member_Notification" EntityType="HeraModel.Member_Notification" />
+          <EntitySet Name="Member_Notification_Log" EntityType="HeraModel.Member_Notification_Log" />
+          <EntitySet Name="Member_Pregnancy" EntityType="HeraModel.Member_Pregnancy" />
+          <EntitySet Name="Member_Question_Answer" EntityType="HeraModel.Member_Question_Answer" />
+          <EntitySet Name="Notification" EntityType="HeraModel.Notification" />
+          <EntitySet Name="Notification_Message" EntityType="HeraModel.Notification_Message" />
+          <EntitySet Name="Notification_Sent" EntityType="HeraModel.Notification_Sent" />
+          <EntitySet Name="Notification_Sent_Detail" EntityType="HeraModel.Notification_Sent_Detail" />
+          <EntitySet Name="SLanguage" EntityType="HeraModel.SLanguage" />
+          <EntitySet Name="SLocation_City" EntityType="HeraModel.SLocation_City" />
+          <EntitySet Name="SLocation_Country" EntityType="HeraModel.SLocation_Country" />
+          <EntitySet Name="SLocation_Region" EntityType="HeraModel.SLocation_Region" />
+          <EntitySet Name="SResource" EntityType="HeraModel.SResource" />
+          <EntitySet Name="SType_Data" EntityType="HeraModel.SType_Data" />
+          <EntitySet Name="SType_Media" EntityType="HeraModel.SType_Media" />
+          <EntitySet Name="SType_Menu" EntityType="HeraModel.SType_Menu" />
+          <EntitySet Name="SType_Notification" EntityType="HeraModel.SType_Notification" />
+          <EntitySet Name="SType_QuestionAnswer" EntityType="HeraModel.SType_QuestionAnswer" />
+          <EntitySet Name="SType_Table" EntityType="HeraModel.SType_Table" />
+          <EntitySet Name="SUser" EntityType="HeraModel.SUser" />
+          <EntitySet Name="Translation" EntityType="HeraModel.Translation" />
+          <EntitySet Name="Vaccinate" EntityType="HeraModel.Vaccinate" />
+          <EntitySet Name="Vaccinate_Detail" EntityType="HeraModel.Vaccinate_Detail" />
+          <EntitySet Name="Vaccinate_Message" EntityType="HeraModel.Vaccinate_Message" />
+          <AssociationSet Name="FK_App_Screen_App_Screen_Category" Association="HeraModel.FK_App_Screen_App_Screen_Category">
+            <End Role="App_Screen_Category" EntitySet="App_Screen_Category" />
+            <End Role="App_Screen" EntitySet="App_Screen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_App_Screen_Text_App_Screen" Association="HeraModel.FK_App_Screen_Text_App_Screen">
+            <End Role="App_Screen" EntitySet="App_Screen" />
+            <End Role="App_Screen_Text" EntitySet="App_Screen_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_App_Screen_Text_SLanguage" Association="HeraModel.FK_App_Screen_Text_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="App_Screen_Text" EntitySet="App_Screen_Text" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Media_Category" Association="HeraModel.FK_Category_Media_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Media" EntitySet="Category_Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Category" Association="HeraModel.FK_Category_Question_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Question" EntitySet="Category_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Category" Association="HeraModel.FK_Member_Question_Answer_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Media_SType_Media" Association="HeraModel.FK_Category_Media_SType_Media">
+            <End Role="SType_Media" EntitySet="SType_Media" />
+            <End Role="Category_Media" EntitySet="Category_Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Answer_Category_Question" Association="HeraModel.FK_Category_Question_Answer_Category_Question">
+            <End Role="Category_Question" EntitySet="Category_Question" />
+            <End Role="Category_Question_Answer" EntitySet="Category_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_SType_QuestionAnswer" Association="HeraModel.FK_Category_Question_SType_QuestionAnswer">
+            <End Role="SType_QuestionAnswer" EntitySet="SType_QuestionAnswer" />
+            <End Role="Category_Question" EntitySet="Category_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Category_Question" Association="HeraModel.FK_Member_Question_Answer_Category_Question">
+            <End Role="Category_Question" EntitySet="Category_Question" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Question_Answer_SType_Data" Association="HeraModel.FK_Category_Question_Answer_SType_Data">
+            <End Role="SType_Data" EntitySet="SType_Data" />
+            <End Role="Category_Question_Answer" EntitySet="Category_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_CMS_Content" Association="HeraModel.FK_CMS_Content_Detail_CMS_Content">
+            <End Role="CMS_Content" EntitySet="CMS_Content" />
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_SLanguage" Association="HeraModel.FK_CMS_Content_Detail_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Member" Association="HeraModel.FK_Member_Child_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Child" EntitySet="Member_Child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Vaccinate_Member" Association="HeraModel.FK_Member_Child_Vaccinate_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Child_Vaccinate" EntitySet="Member_Child_Vaccinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Health_Record_Member" Association="HeraModel.FK_Member_Health_Record_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Health_Record" EntitySet="Member_Health_Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_Member" Association="HeraModel.FK_Member_Notification_Log_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Member" Association="HeraModel.FK_Member_Notification_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Notification" EntitySet="Member_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Pregnancy_Member" Association="HeraModel.FK_Member_Pregnancy_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Pregnancy" EntitySet="Member_Pregnancy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Question_Answer_Member" Association="HeraModel.FK_Member_Question_Answer_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Member_Question_Answer" EntitySet="Member_Question_Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Child_Vaccinate_Member_Child" Association="HeraModel.FK_Member_Child_Vaccinate_Member_Child">
+            <End Role="Member_Child" EntitySet="Member_Child" />
+            <End Role="Member_Child_Vaccinate" EntitySet="Member_Child_Vaccinate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Notification_Sent" Association="HeraModel.FK_Member_Notification_Notification_Sent">
+            <End Role="Notification_Sent" EntitySet="Notification_Sent" />
+            <End Role="Member_Notification" EntitySet="Member_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_Notification" Association="HeraModel.FK_Member_Notification_Log_Notification">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Notification_Log_SType_Notification" Association="HeraModel.FK_Member_Notification_Log_SType_Notification">
+            <End Role="SType_Notification" EntitySet="SType_Notification" />
+            <End Role="Member_Notification_Log" EntitySet="Member_Notification_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Message_Notification" Association="HeraModel.FK_Notification_Message_Notification">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="Notification_Message" EntitySet="Notification_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_SType_Notification" Association="HeraModel.FK_Notification_SType_Notification">
+            <End Role="SType_Notification" EntitySet="SType_Notification" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Message_SLanguage" Association="HeraModel.FK_Notification_Message_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Notification_Message" EntitySet="Notification_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Sent_Detail_SLanguage" Association="HeraModel.FK_Notification_Sent_Detail_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Notification_Sent_Detail" EntitySet="Notification_Sent_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SResource_SLanguage" Association="HeraModel.FK_SResource_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="SResource" EntitySet="SResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_SLanguage" Association="HeraModel.FK_Translation_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Message_SLanguage" Association="HeraModel.FK_Vaccinate_Message_SLanguage">
+            <End Role="SLanguage" EntitySet="SLanguage" />
+            <End Role="Vaccinate_Message" EntitySet="Vaccinate_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLocation_City_SLocation_Country" Association="HeraModel.FK_SLocation_City_SLocation_Country">
+            <End Role="SLocation_Country" EntitySet="SLocation_Country" />
+            <End Role="SLocation_City" EntitySet="SLocation_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLocation_Region_SLocation_City" Association="HeraModel.FK_SLocation_Region_SLocation_City">
+            <End Role="SLocation_City" EntitySet="SLocation_City" />
+            <End Role="SLocation_Region" EntitySet="SLocation_Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Translation_SType_Table" Association="HeraModel.FK_Translation_SType_Table">
+            <End Role="SType_Table" EntitySet="SType_Table" />
+            <End Role="Translation" EntitySet="Translation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Detail_Vaccinate" Association="HeraModel.FK_Vaccinate_Detail_Vaccinate">
+            <End Role="Vaccinate" EntitySet="Vaccinate" />
+            <End Role="Vaccinate_Detail" EntitySet="Vaccinate_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vaccinate_Message_Vaccinate_Detail" Association="HeraModel.FK_Vaccinate_Message_Vaccinate_Detail">
+            <End Role="Vaccinate_Detail" EntitySet="Vaccinate_Detail" />
+            <End Role="Vaccinate_Message" EntitySet="Vaccinate_Message" />
+          </AssociationSet>
+          <FunctionImport Name="sp_Get_Member_Calendar" ReturnType="Collection(HeraModel.sp_Get_Member_Calendar_Result)">
+          <Parameter Name="MemberId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Mobile_Member_Language_Change" ReturnType="Collection(HeraModel.sp_Mobile_Member_Language_Change_Result)">
+          <Parameter Name="MemberId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Manage_Dashboard_AVG_Child" ReturnType="Collection(HeraModel.sp_Manage_Dashboard_AVG_Child_Result)" />
+          <FunctionImport Name="sp_Manage_Dashboard_Member_Age" ReturnType="Collection(HeraModel.sp_Manage_Dashboard_Member_Age_Result)" />
+          <EntitySet Name="CMS_Content_Detail_Log" EntityType="HeraModel.CMS_Content_Detail_Log" />
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_CMS_Content" Association="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content">
+            <End Role="CMS_Content" EntitySet="CMS_Content" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_CMS_Content_Detail" Association="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content_Detail">
+            <End Role="CMS_Content_Detail" EntitySet="CMS_Content_Detail" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CMS_Content_Detail_Log_Member" Association="HeraModel.FK_CMS_Content_Detail_Log_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="CMS_Content_Detail_Log" EntitySet="CMS_Content_Detail_Log" />
+          </AssociationSet>
+          <FunctionImport Name="sp_Notification_Job_ChildVaccinate" ReturnType="Collection(HeraModel.sp_Notification_Job_ChildVaccinate_Result)" />
+        </EntityContainer>
+        <ComplexType Name="sp_Mobile_Translation_List_Result">
+          <Property Type="String" Name="Screen" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Label" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsError" Nullable="false" />
+          <Property Type="String" Name="Translation" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="sp_Mobile_NearByHealthCenter_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Latitude" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Longitude" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Distance" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Notification_Job_RutineMessages_Result">
+          <Property Type="String" Name="NotificationUserId" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Message" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="App_Screen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="App_Screen_Category" Relationship="HeraModel.FK_App_Screen_App_Screen_Category" FromRole="App_Screen" ToRole="App_Screen_Category" />
+          <NavigationProperty Name="App_Screen_Text" Relationship="HeraModel.FK_App_Screen_Text_App_Screen" FromRole="App_Screen" ToRole="App_Screen_Text" />
+        </EntityType>
+        <EntityType Name="App_Screen_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="App_Screen" Relationship="HeraModel.FK_App_Screen_App_Screen_Category" FromRole="App_Screen_Category" ToRole="App_Screen" />
+        </EntityType>
+        <EntityType Name="App_Screen_Text">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScreenId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="IsError" Type="Boolean" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Translation" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="App_Screen" Relationship="HeraModel.FK_App_Screen_Text_App_Screen" FromRole="App_Screen_Text" ToRole="App_Screen" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_App_Screen_Text_SLanguage" FromRole="App_Screen_Text" ToRole="SLanguage" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Media" Relationship="HeraModel.FK_Category_Media_Category" FromRole="Category" ToRole="Category_Media" />
+          <NavigationProperty Name="Category_Question" Relationship="HeraModel.FK_Category_Question_Category" FromRole="Category" ToRole="Category_Question" />
+          <NavigationProperty Name="Member_Question_Answer" Relationship="HeraModel.FK_Member_Question_Answer_Category" FromRole="Category" ToRole="Member_Question_Answer" />
+        </EntityType>
+        <EntityType Name="Category_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="MediaTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FileUrl" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Media" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="HeraModel.FK_Category_Media_Category" FromRole="Category_Media" ToRole="Category" />
+          <NavigationProperty Name="SType_Media" Relationship="HeraModel.FK_Category_Media_SType_Media" FromRole="Category_Media" ToRole="SType_Media" />
+        </EntityType>
+        <EntityType Name="Category_Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <Property Name="AnswerTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsConnected" Type="Boolean" Nullable="false" />
+          <Property Name="ConnectedQuestionId" Type="Int32" />
+          <Property Name="ConnectedAnswerId" Type="Int32" />
+          <Property Name="AnswerDataTypeId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="HeraModel.FK_Category_Question_Category" FromRole="Category_Question" ToRole="Category" />
+          <NavigationProperty Name="Category_Question_Answer" Relationship="HeraModel.FK_Category_Question_Answer_Category_Question" FromRole="Category_Question" ToRole="Category_Question_Answer" />
+          <NavigationProperty Name="SType_QuestionAnswer" Relationship="HeraModel.FK_Category_Question_SType_QuestionAnswer" FromRole="Category_Question" ToRole="SType_QuestionAnswer" />
+          <NavigationProperty Name="Member_Question_Answer" Relationship="HeraModel.FK_Member_Question_Answer_Category_Question" FromRole="Category_Question" ToRole="Member_Question_Answer" />
+        </EntityType>
+        <EntityType Name="Category_Question_Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="DataTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category_Question" Relationship="HeraModel.FK_Category_Question_Answer_Category_Question" FromRole="Category_Question_Answer" ToRole="Category_Question" />
+          <NavigationProperty Name="SType_Data" Relationship="HeraModel.FK_Category_Question_Answer_SType_Data" FromRole="Category_Question_Answer" ToRole="SType_Data" />
+        </EntityType>
+        <EntityType Name="CMS_Content">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CMS_Content_Detail" Relationship="HeraModel.FK_CMS_Content_Detail_CMS_Content" FromRole="CMS_Content" ToRole="CMS_Content_Detail" />
+          <NavigationProperty Name="CMS_Content_Detail_Log" Relationship="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content" FromRole="CMS_Content" ToRole="CMS_Content_Detail_Log" />
+        </EntityType>
+        <EntityType Name="CMS_Content_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Abstract" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ContentHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CMS_Content" Relationship="HeraModel.FK_CMS_Content_Detail_CMS_Content" FromRole="CMS_Content_Detail" ToRole="CMS_Content" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_CMS_Content_Detail_SLanguage" FromRole="CMS_Content_Detail" ToRole="SLanguage" />
+          <NavigationProperty Name="CMS_Content_Detail_Log" Relationship="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content_Detail" FromRole="CMS_Content_Detail" ToRole="CMS_Content_Detail_Log" />
+        </EntityType>
+        <EntityType Name="Health_Center">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Job" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="ApproveCode" Type="Guid" Nullable="false" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+          <Property Name="Platform" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ForgotPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationUserId" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member_Child" Relationship="HeraModel.FK_Member_Child_Member" FromRole="Member" ToRole="Member_Child" />
+          <NavigationProperty Name="Member_Child_Vaccinate" Relationship="HeraModel.FK_Member_Child_Vaccinate_Member" FromRole="Member" ToRole="Member_Child_Vaccinate" />
+          <NavigationProperty Name="Member_Health_Record" Relationship="HeraModel.FK_Member_Health_Record_Member" FromRole="Member" ToRole="Member_Health_Record" />
+          <NavigationProperty Name="Member_Notification_Log" Relationship="HeraModel.FK_Member_Notification_Log_Member" FromRole="Member" ToRole="Member_Notification_Log" />
+          <NavigationProperty Name="Member_Notification" Relationship="HeraModel.FK_Member_Notification_Member" FromRole="Member" ToRole="Member_Notification" />
+          <NavigationProperty Name="Member_Pregnancy" Relationship="HeraModel.FK_Member_Pregnancy_Member" FromRole="Member" ToRole="Member_Pregnancy" />
+          <NavigationProperty Name="Member_Question_Answer" Relationship="HeraModel.FK_Member_Question_Answer_Member" FromRole="Member" ToRole="Member_Question_Answer" />
+          <NavigationProperty Name="CMS_Content_Detail_Log" Relationship="HeraModel.FK_CMS_Content_Detail_Log_Member" FromRole="Member" ToRole="CMS_Content_Detail_Log" />
+        </EntityType>
+        <EntityType Name="Member_Child">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="NameSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Vaccine" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Child_Member" FromRole="Member_Child" ToRole="Member" />
+          <NavigationProperty Name="Member_Child_Vaccinate" Relationship="HeraModel.FK_Member_Child_Vaccinate_Member_Child" FromRole="Member_Child" ToRole="Member_Child_Vaccinate" />
+        </EntityType>
+        <EntityType Name="Member_Child_Vaccinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="ChildId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="ReminderTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReminderMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Child_Vaccinate_Member" FromRole="Member_Child_Vaccinate" ToRole="Member" />
+          <NavigationProperty Name="Member_Child" Relationship="HeraModel.FK_Member_Child_Vaccinate_Member_Child" FromRole="Member_Child_Vaccinate" ToRole="Member_Child" />
+        </EntityType>
+        <EntityType Name="Member_Health_Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Health_Record_Member" FromRole="Member_Health_Record" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationSentId" Type="Int32" Nullable="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="ReadDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Notification_Member" FromRole="Member_Notification" ToRole="Member" />
+          <NavigationProperty Name="Notification_Sent" Relationship="HeraModel.FK_Member_Notification_Notification_Sent" FromRole="Member_Notification" ToRole="Notification_Sent" />
+        </EntityType>
+        <EntityType Name="Member_Notification_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Notification_Log_Member" FromRole="Member_Notification_Log" ToRole="Member" />
+          <NavigationProperty Name="Notification" Relationship="HeraModel.FK_Member_Notification_Log_Notification" FromRole="Member_Notification_Log" ToRole="Notification" />
+          <NavigationProperty Name="SType_Notification" Relationship="HeraModel.FK_Member_Notification_Log_SType_Notification" FromRole="Member_Notification_Log" ToRole="SType_Notification" />
+        </EntityType>
+        <EntityType Name="Member_Pregnancy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Precision="3" />
+          <Property Name="ReminderTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReminderMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Pregnancy_Member" FromRole="Member_Pregnancy" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member_Question_Answer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="AnswerId" Type="Int32" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ChildId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="HeraModel.FK_Member_Question_Answer_Category" FromRole="Member_Question_Answer" ToRole="Category" />
+          <NavigationProperty Name="Category_Question" Relationship="HeraModel.FK_Member_Question_Answer_Category_Question" FromRole="Member_Question_Answer" ToRole="Category_Question" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_Member_Question_Answer_Member" FromRole="Member_Question_Answer" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinWeek" Type="Int32" Nullable="false" />
+          <Property Name="MaxWeek" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsWeekly" Type="Boolean" Nullable="false" />
+          <Property Name="AfterBirth" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member_Notification_Log" Relationship="HeraModel.FK_Member_Notification_Log_Notification" FromRole="Notification" ToRole="Member_Notification_Log" />
+          <NavigationProperty Name="Notification_Message" Relationship="HeraModel.FK_Notification_Message_Notification" FromRole="Notification" ToRole="Notification_Message" />
+          <NavigationProperty Name="SType_Notification" Relationship="HeraModel.FK_Notification_SType_Notification" FromRole="Notification" ToRole="SType_Notification" />
+        </EntityType>
+        <EntityType Name="Notification_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notification" Relationship="HeraModel.FK_Notification_Message_Notification" FromRole="Notification_Message" ToRole="Notification" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_Notification_Message_SLanguage" FromRole="Notification_Message" ToRole="SLanguage" />
+        </EntityType>
+        <EntityType Name="Notification_Sent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationTypeId" Type="Int32" />
+          <Property Name="NotificationId" Type="Int32" />
+          <NavigationProperty Name="Member_Notification" Relationship="HeraModel.FK_Member_Notification_Notification_Sent" FromRole="Notification_Sent" ToRole="Member_Notification" />
+        </EntityType>
+        <EntityType Name="Notification_Sent_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SentId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_Notification_Sent_Detail_SLanguage" FromRole="Notification_Sent_Detail" ToRole="SLanguage" />
+        </EntityType>
+        <EntityType Name="SLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="IsoCode" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="App_Screen_Text" Relationship="HeraModel.FK_App_Screen_Text_SLanguage" FromRole="SLanguage" ToRole="App_Screen_Text" />
+          <NavigationProperty Name="CMS_Content_Detail" Relationship="HeraModel.FK_CMS_Content_Detail_SLanguage" FromRole="SLanguage" ToRole="CMS_Content_Detail" />
+          <NavigationProperty Name="Notification_Message" Relationship="HeraModel.FK_Notification_Message_SLanguage" FromRole="SLanguage" ToRole="Notification_Message" />
+          <NavigationProperty Name="Notification_Sent_Detail" Relationship="HeraModel.FK_Notification_Sent_Detail_SLanguage" FromRole="SLanguage" ToRole="Notification_Sent_Detail" />
+          <NavigationProperty Name="SResource" Relationship="HeraModel.FK_SResource_SLanguage" FromRole="SLanguage" ToRole="SResource" />
+          <NavigationProperty Name="Translation" Relationship="HeraModel.FK_Translation_SLanguage" FromRole="SLanguage" ToRole="Translation" />
+          <NavigationProperty Name="Vaccinate_Message" Relationship="HeraModel.FK_Vaccinate_Message_SLanguage" FromRole="SLanguage" ToRole="Vaccinate_Message" />
+        </EntityType>
+        <EntityType Name="SLocation_City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneCode" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SLocation_Country" Relationship="HeraModel.FK_SLocation_City_SLocation_Country" FromRole="SLocation_City" ToRole="SLocation_Country" />
+          <NavigationProperty Name="SLocation_Region" Relationship="HeraModel.FK_SLocation_Region_SLocation_City" FromRole="SLocation_City" ToRole="SLocation_Region" />
+        </EntityType>
+        <EntityType Name="SLocation_Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Flag" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SLocation_City" Relationship="HeraModel.FK_SLocation_City_SLocation_Country" FromRole="SLocation_Country" ToRole="SLocation_City" />
+        </EntityType>
+        <EntityType Name="SLocation_Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SLocation_City" Relationship="HeraModel.FK_SLocation_Region_SLocation_City" FromRole="SLocation_Region" ToRole="SLocation_City" />
+        </EntityType>
+        <EntityType Name="SResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Screen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsError" Type="Boolean" Nullable="false" />
+          <Property Name="IsLabel" Type="Boolean" Nullable="false" />
+          <Property Name="IsInfo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_SResource_SLanguage" FromRole="SResource" ToRole="SLanguage" />
+        </EntityType>
+        <EntityType Name="SType_Data">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Question_Answer" Relationship="HeraModel.FK_Category_Question_Answer_SType_Data" FromRole="SType_Data" ToRole="Category_Question_Answer" />
+        </EntityType>
+        <EntityType Name="SType_Media">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MinWidth" Type="Int32" Nullable="false" />
+          <Property Name="MinHeight" Type="Int32" Nullable="false" />
+          <Property Name="IsVideo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category_Media" Relationship="HeraModel.FK_Category_Media_SType_Media" FromRole="SType_Media" ToRole="Category_Media" />
+        </EntityType>
+        <EntityType Name="SType_Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SType_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member_Notification_Log" Relationship="HeraModel.FK_Member_Notification_Log_SType_Notification" FromRole="SType_Notification" ToRole="Member_Notification_Log" />
+          <NavigationProperty Name="Notification" Relationship="HeraModel.FK_Notification_SType_Notification" FromRole="SType_Notification" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="SType_QuestionAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Question" Relationship="HeraModel.FK_Category_Question_SType_QuestionAnswer" FromRole="SType_QuestionAnswer" ToRole="Category_Question" />
+        </EntityType>
+        <EntityType Name="SType_Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FQN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasTranslation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Translation" Relationship="HeraModel.FK_Translation_SType_Table" FromRole="SType_Table" ToRole="Translation" />
+        </EntityType>
+        <EntityType Name="SUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="RecordId" Type="Int32" Nullable="false" />
+          <Property Name="Translation1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_Translation_SLanguage" FromRole="Translation" ToRole="SLanguage" />
+          <NavigationProperty Name="SType_Table" Relationship="HeraModel.FK_Translation_SType_Table" FromRole="Translation" ToRole="SType_Table" />
+        </EntityType>
+        <EntityType Name="Vaccinate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vaccinate_Detail" Relationship="HeraModel.FK_Vaccinate_Detail_Vaccinate" FromRole="Vaccinate" ToRole="Vaccinate_Detail" />
+        </EntityType>
+        <EntityType Name="Vaccinate_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VaccinateId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Vaccinate" Relationship="HeraModel.FK_Vaccinate_Detail_Vaccinate" FromRole="Vaccinate_Detail" ToRole="Vaccinate" />
+          <NavigationProperty Name="Vaccinate_Message" Relationship="HeraModel.FK_Vaccinate_Message_Vaccinate_Detail" FromRole="Vaccinate_Detail" ToRole="Vaccinate_Message" />
+        </EntityType>
+        <EntityType Name="Vaccinate_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VaccinateDetailId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsWeekly" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SLanguage" Relationship="HeraModel.FK_Vaccinate_Message_SLanguage" FromRole="Vaccinate_Message" ToRole="SLanguage" />
+          <NavigationProperty Name="Vaccinate_Detail" Relationship="HeraModel.FK_Vaccinate_Message_Vaccinate_Detail" FromRole="Vaccinate_Message" ToRole="Vaccinate_Detail" />
+        </EntityType>
+        <Association Name="FK_App_Screen_App_Screen_Category">
+          <End Type="HeraModel.App_Screen_Category" Role="App_Screen_Category" Multiplicity="1" />
+          <End Type="HeraModel.App_Screen" Role="App_Screen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_Screen_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_App_Screen_Text_App_Screen">
+          <End Type="HeraModel.App_Screen" Role="App_Screen" Multiplicity="1" />
+          <End Type="HeraModel.App_Screen_Text" Role="App_Screen_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App_Screen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen_Text">
+              <PropertyRef Name="ScreenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_App_Screen_Text_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.App_Screen_Text" Role="App_Screen_Text" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="App_Screen_Text">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Media_Category">
+          <End Type="HeraModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="HeraModel.Category_Media" Role="Category_Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Media">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Category">
+          <End Type="HeraModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="HeraModel.Category_Question" Role="Category_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Category">
+          <End Type="HeraModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="HeraModel.Member_Question_Answer" Role="Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Media_SType_Media">
+          <End Type="HeraModel.SType_Media" Role="SType_Media" Multiplicity="1" />
+          <End Type="HeraModel.Category_Media" Role="Category_Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Media">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Answer_Category_Question">
+          <End Type="HeraModel.Category_Question" Role="Category_Question" Multiplicity="1" />
+          <End Type="HeraModel.Category_Question_Answer" Role="Category_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question_Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_SType_QuestionAnswer">
+          <End Type="HeraModel.SType_QuestionAnswer" Role="SType_QuestionAnswer" Multiplicity="1" />
+          <End Type="HeraModel.Category_Question" Role="Category_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_QuestionAnswer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question">
+              <PropertyRef Name="AnswerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Category_Question">
+          <End Type="HeraModel.Category_Question" Role="Category_Question" Multiplicity="1" />
+          <End Type="HeraModel.Member_Question_Answer" Role="Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Question_Answer_SType_Data">
+          <End Type="HeraModel.SType_Data" Role="SType_Data" Multiplicity="1" />
+          <End Type="HeraModel.Category_Question_Answer" Role="Category_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Data">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Question_Answer">
+              <PropertyRef Name="DataTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_CMS_Content">
+          <End Type="HeraModel.CMS_Content" Role="CMS_Content" Multiplicity="1" />
+          <End Type="HeraModel.CMS_Content_Detail" Role="CMS_Content_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.CMS_Content_Detail" Role="CMS_Content_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Child" Role="Member_Child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Vaccinate_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Child_Vaccinate" Role="Member_Child_Vaccinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child_Vaccinate">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Health_Record_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Health_Record" Role="Member_Health_Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Health_Record">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Notification_Log" Role="Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Notification" Role="Member_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Pregnancy_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Pregnancy" Role="Member_Pregnancy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Pregnancy">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Question_Answer_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.Member_Question_Answer" Role="Member_Question_Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Question_Answer">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Child_Vaccinate_Member_Child">
+          <End Type="HeraModel.Member_Child" Role="Member_Child" Multiplicity="1" />
+          <End Type="HeraModel.Member_Child_Vaccinate" Role="Member_Child_Vaccinate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member_Child">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Child_Vaccinate">
+              <PropertyRef Name="ChildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Notification_Sent">
+          <End Type="HeraModel.Notification_Sent" Role="Notification_Sent" Multiplicity="1" />
+          <End Type="HeraModel.Member_Notification" Role="Member_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification_Sent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification">
+              <PropertyRef Name="NotificationSentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_Notification">
+          <End Type="HeraModel.Notification" Role="Notification" Multiplicity="1" />
+          <End Type="HeraModel.Member_Notification_Log" Role="Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Notification_Log_SType_Notification">
+          <End Type="HeraModel.SType_Notification" Role="SType_Notification" Multiplicity="1" />
+          <End Type="HeraModel.Member_Notification_Log" Role="Member_Notification_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member_Notification_Log">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Message_Notification">
+          <End Type="HeraModel.Notification" Role="Notification" Multiplicity="1" />
+          <End Type="HeraModel.Notification_Message" Role="Notification_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Message">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_SType_Notification">
+          <End Type="HeraModel.SType_Notification" Role="SType_Notification" Multiplicity="1" />
+          <End Type="HeraModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Message_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.Notification_Message" Role="Notification_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Message">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Sent_Detail_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.Notification_Sent_Detail" Role="Notification_Sent_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification_Sent_Detail">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SResource_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.SResource" Role="SResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SResource">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.Translation" Role="Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Message_SLanguage">
+          <End Type="HeraModel.SLanguage" Role="SLanguage" Multiplicity="1" />
+          <End Type="HeraModel.Vaccinate_Message" Role="Vaccinate_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Message">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLocation_City_SLocation_Country">
+          <End Type="HeraModel.SLocation_Country" Role="SLocation_Country" Multiplicity="1" />
+          <End Type="HeraModel.SLocation_City" Role="SLocation_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLocation_Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SLocation_City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLocation_Region_SLocation_City">
+          <End Type="HeraModel.SLocation_City" Role="SLocation_City" Multiplicity="1" />
+          <End Type="HeraModel.SLocation_Region" Role="SLocation_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLocation_City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SLocation_Region">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Translation_SType_Table">
+          <End Type="HeraModel.SType_Table" Role="SType_Table" Multiplicity="1" />
+          <End Type="HeraModel.Translation" Role="Translation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SType_Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Translation">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Detail_Vaccinate">
+          <End Type="HeraModel.Vaccinate" Role="Vaccinate" Multiplicity="1" />
+          <End Type="HeraModel.Vaccinate_Detail" Role="Vaccinate_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccinate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Detail">
+              <PropertyRef Name="VaccinateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vaccinate_Message_Vaccinate_Detail">
+          <End Type="HeraModel.Vaccinate_Detail" Role="Vaccinate_Detail" Multiplicity="1" />
+          <End Type="HeraModel.Vaccinate_Message" Role="Vaccinate_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccinate_Detail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vaccinate_Message">
+              <PropertyRef Name="VaccinateDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_Get_Member_Calendar_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="NameInfo" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Message" Nullable="false" />
+          <Property Type="Boolean" Name="IsCompleted" Nullable="false" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReminderTitle" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ReminderMessage" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_Mobile_Member_Language_Change_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="MemberId" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Message" Nullable="false" />
+          <Property Type="Boolean" Name="IsCompleted" Nullable="false" />
+          <Property Type="DateTime" Name="CompletedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReminderTitle" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ReminderMessage" Nullable="false" />
+          <Property Type="Int32" Name="NotificationId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_Manage_Dashboard_AVG_Child_Result">
+          <Property Type="Int32" Name="MemberCount" Nullable="true" />
+          <Property Type="Int32" Name="ChildCount" Nullable="true" />
+          <Property Type="Double" Name="AVGChildCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Manage_Dashboard_Member_Age_Result">
+          <Property Type="Int32" Name="Count" Nullable="true" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="Int32" Name="SubTotalAge" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CMS_Content_Detail_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="ContentId" Type="Int32" Nullable="false" />
+          <Property Name="ContentDetailId" Type="Int32" Nullable="false" />
+          <Property Name="OpenTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CloseTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CMS_Content" Relationship="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content" FromRole="CMS_Content_Detail_Log" ToRole="CMS_Content" />
+          <NavigationProperty Name="CMS_Content_Detail" Relationship="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content_Detail" FromRole="CMS_Content_Detail_Log" ToRole="CMS_Content_Detail" />
+          <NavigationProperty Name="Member" Relationship="HeraModel.FK_CMS_Content_Detail_Log_Member" FromRole="CMS_Content_Detail_Log" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_CMS_Content_Detail_Log_CMS_Content">
+          <End Type="HeraModel.CMS_Content" Role="CMS_Content" Multiplicity="1" />
+          <End Type="HeraModel.CMS_Content_Detail_Log" Role="CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="ContentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_Log_CMS_Content_Detail">
+          <End Type="HeraModel.CMS_Content_Detail" Role="CMS_Content_Detail" Multiplicity="1" />
+          <End Type="HeraModel.CMS_Content_Detail_Log" Role="CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMS_Content_Detail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="ContentDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CMS_Content_Detail_Log_Member">
+          <End Type="HeraModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="HeraModel.CMS_Content_Detail_Log" Role="CMS_Content_Detail_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CMS_Content_Detail_Log">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_Notification_Job_ChildVaccinate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="MemberId" Nullable="false" />
+          <Property Type="Int32" Name="ChildId" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Message" Nullable="false" />
+          <Property Type="String" Name="ReminderTitle" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="ReminderMessage" Nullable="false" />
+          <Property Type="Int32" Name="NotificationId" Nullable="false" />
+          <Property Type="String" Name="NotificationUserId" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="IsCompleted" Nullable="false" />
+          <Property Type="String" Name="Language" Nullable="true" MaxLength="6" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HeraModelStoreContainer" CdmEntityContainer="HeraEntities">
+          <FunctionImportMapping FunctionImportName="sp_Mobile_Translation_List" FunctionName="HeraModel.Store.sp_Mobile_Translation_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Mobile_Translation_List_Result">
+                <ScalarProperty Name="Screen" ColumnName="Screen" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Mobile_NearByHealthCenter" FunctionName="HeraModel.Store.sp_Mobile_NearByHealthCenter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Mobile_NearByHealthCenter_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Notification_Job_RutineMessages" FunctionName="HeraModel.Store.sp_Notification_Job_RutineMessages">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Notification_Job_RutineMessages_Result">
+                <ScalarProperty Name="NotificationUserId" ColumnName="NotificationUserId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Set_Child_Vaccinate" FunctionName="HeraModel.Store.sp_Set_Child_Vaccinate" />
+          <FunctionImportMapping FunctionImportName="sp_Update_Child_Vaccinate" FunctionName="HeraModel.Store.sp_Update_Child_Vaccinate" />
+          <FunctionImportMapping FunctionImportName="sp_Set_Member_Pregnancy" FunctionName="HeraModel.Store.sp_Set_Member_Pregnancy" />
+          <EntitySetMapping Name="App_Screen">
+            <EntityTypeMapping TypeName="HeraModel.App_Screen">
+              <MappingFragment StoreEntitySet="App_Screen">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App_Screen_Category">
+            <EntityTypeMapping TypeName="HeraModel.App_Screen_Category">
+              <MappingFragment StoreEntitySet="App_Screen_Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App_Screen_Text">
+            <EntityTypeMapping TypeName="HeraModel.App_Screen_Text">
+              <MappingFragment StoreEntitySet="App_Screen_Text">
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="ScreenId" ColumnName="ScreenId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="HeraModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Media">
+            <EntityTypeMapping TypeName="HeraModel.Category_Media">
+              <MappingFragment StoreEntitySet="Category_Media">
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Media" ColumnName="Media" />
+                <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+                <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Question">
+            <EntityTypeMapping TypeName="HeraModel.Category_Question">
+              <MappingFragment StoreEntitySet="Category_Question">
+                <ScalarProperty Name="AnswerDataTypeId" ColumnName="AnswerDataTypeId" />
+                <ScalarProperty Name="ConnectedAnswerId" ColumnName="ConnectedAnswerId" />
+                <ScalarProperty Name="ConnectedQuestionId" ColumnName="ConnectedQuestionId" />
+                <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
+                <ScalarProperty Name="AnswerTypeId" ColumnName="AnswerTypeId" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Question_Answer">
+            <EntityTypeMapping TypeName="HeraModel.Category_Question_Answer">
+              <MappingFragment StoreEntitySet="Category_Question_Answer">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CMS_Content">
+            <EntityTypeMapping TypeName="HeraModel.CMS_Content">
+              <MappingFragment StoreEntitySet="CMS_Content">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CMS_Content_Detail">
+            <EntityTypeMapping TypeName="HeraModel.CMS_Content_Detail">
+              <MappingFragment StoreEntitySet="CMS_Content_Detail">
+                <ScalarProperty Name="ContentHtml" ColumnName="ContentHtml" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Health_Center">
+            <EntityTypeMapping TypeName="HeraModel.Health_Center">
+              <MappingFragment StoreEntitySet="Health_Center">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="HeraModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="NotificationUserId" ColumnName="NotificationUserId" />
+                <ScalarProperty Name="ForgotPassword" ColumnName="ForgotPassword" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ApproveCode" ColumnName="ApproveCode" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Child">
+            <EntityTypeMapping TypeName="HeraModel.Member_Child">
+              <MappingFragment StoreEntitySet="Member_Child">
+                <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Child_Vaccinate">
+            <EntityTypeMapping TypeName="HeraModel.Member_Child_Vaccinate">
+              <MappingFragment StoreEntitySet="Member_Child_Vaccinate">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+                <ScalarProperty Name="ReminderTitle" ColumnName="ReminderTitle" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Health_Record">
+            <EntityTypeMapping TypeName="HeraModel.Member_Health_Record">
+              <MappingFragment StoreEntitySet="Member_Health_Record">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Notification">
+            <EntityTypeMapping TypeName="HeraModel.Member_Notification">
+              <MappingFragment StoreEntitySet="Member_Notification">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="ReadDate" ColumnName="ReadDate" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="NotificationSentId" ColumnName="NotificationSentId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Notification_Log">
+            <EntityTypeMapping TypeName="HeraModel.Member_Notification_Log">
+              <MappingFragment StoreEntitySet="Member_Notification_Log">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Pregnancy">
+            <EntityTypeMapping TypeName="HeraModel.Member_Pregnancy">
+              <MappingFragment StoreEntitySet="Member_Pregnancy">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+                <ScalarProperty Name="ReminderTitle" ColumnName="ReminderTitle" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Question_Answer">
+            <EntityTypeMapping TypeName="HeraModel.Member_Question_Answer">
+              <MappingFragment StoreEntitySet="Member_Question_Answer">
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="HeraModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="AfterBirth" ColumnName="AfterBirth" />
+                <ScalarProperty Name="IsWeekly" ColumnName="IsWeekly" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaxWeek" ColumnName="MaxWeek" />
+                <ScalarProperty Name="MinWeek" ColumnName="MinWeek" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification_Message">
+            <EntityTypeMapping TypeName="HeraModel.Notification_Message">
+              <MappingFragment StoreEntitySet="Notification_Message">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification_Sent">
+            <EntityTypeMapping TypeName="HeraModel.Notification_Sent">
+              <MappingFragment StoreEntitySet="Notification_Sent">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification_Sent_Detail">
+            <EntityTypeMapping TypeName="HeraModel.Notification_Sent_Detail">
+              <MappingFragment StoreEntitySet="Notification_Sent_Detail">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="SentId" ColumnName="SentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLanguage">
+            <EntityTypeMapping TypeName="HeraModel.SLanguage">
+              <MappingFragment StoreEntitySet="SLanguage">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsoCode" ColumnName="IsoCode" />
+                <ScalarProperty Name="MobileCode" ColumnName="MobileCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLocation_City">
+            <EntityTypeMapping TypeName="HeraModel.SLocation_City">
+              <MappingFragment StoreEntitySet="SLocation_City">
+                <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLocation_Country">
+            <EntityTypeMapping TypeName="HeraModel.SLocation_Country">
+              <MappingFragment StoreEntitySet="SLocation_Country">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLocation_Region">
+            <EntityTypeMapping TypeName="HeraModel.SLocation_Region">
+              <MappingFragment StoreEntitySet="SLocation_Region">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SResource">
+            <EntityTypeMapping TypeName="HeraModel.SResource">
+              <MappingFragment StoreEntitySet="SResource">
+                <ScalarProperty Name="IsInfo" ColumnName="IsInfo" />
+                <ScalarProperty Name="IsLabel" ColumnName="IsLabel" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Screen" ColumnName="Screen" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_Data">
+            <EntityTypeMapping TypeName="HeraModel.SType_Data">
+              <MappingFragment StoreEntitySet="SType_Data">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_Media">
+            <EntityTypeMapping TypeName="HeraModel.SType_Media">
+              <MappingFragment StoreEntitySet="SType_Media">
+                <ScalarProperty Name="IsVideo" ColumnName="IsVideo" />
+                <ScalarProperty Name="MinHeight" ColumnName="MinHeight" />
+                <ScalarProperty Name="MinWidth" ColumnName="MinWidth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_Menu">
+            <EntityTypeMapping TypeName="HeraModel.SType_Menu">
+              <MappingFragment StoreEntitySet="SType_Menu">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_Notification">
+            <EntityTypeMapping TypeName="HeraModel.SType_Notification">
+              <MappingFragment StoreEntitySet="SType_Notification">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_QuestionAnswer">
+            <EntityTypeMapping TypeName="HeraModel.SType_QuestionAnswer">
+              <MappingFragment StoreEntitySet="SType_QuestionAnswer">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SType_Table">
+            <EntityTypeMapping TypeName="HeraModel.SType_Table">
+              <MappingFragment StoreEntitySet="SType_Table">
+                <ScalarProperty Name="HasTranslation" ColumnName="HasTranslation" />
+                <ScalarProperty Name="FQN" ColumnName="FQN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUser">
+            <EntityTypeMapping TypeName="HeraModel.SUser">
+              <MappingFragment StoreEntitySet="SUser">
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Translation">
+            <EntityTypeMapping TypeName="HeraModel.Translation">
+              <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="Translation1" ColumnName="Translation" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccinate">
+            <EntityTypeMapping TypeName="HeraModel.Vaccinate">
+              <MappingFragment StoreEntitySet="Vaccinate">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccinate_Detail">
+            <EntityTypeMapping TypeName="HeraModel.Vaccinate_Detail">
+              <MappingFragment StoreEntitySet="Vaccinate_Detail">
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="VaccinateId" ColumnName="VaccinateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccinate_Message">
+            <EntityTypeMapping TypeName="HeraModel.Vaccinate_Message">
+              <MappingFragment StoreEntitySet="Vaccinate_Message">
+                <ScalarProperty Name="IsWeekly" ColumnName="IsWeekly" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="VaccinateDetailId" ColumnName="VaccinateDetailId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Get_Member_Calendar" FunctionName="HeraModel.Store.sp_Get_Member_Calendar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Get_Member_Calendar_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameInfo" ColumnName="NameInfo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="ReminderTitle" ColumnName="ReminderTitle" />
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Mobile_Member_Language_Change" FunctionName="HeraModel.Store.sp_Mobile_Member_Language_Change">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Mobile_Member_Language_Change_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="ReminderTitle" ColumnName="ReminderTitle" />
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Manage_Dashboard_AVG_Child" FunctionName="HeraModel.Store.sp_Manage_Dashboard_AVG_Child">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Manage_Dashboard_AVG_Child_Result">
+                <ScalarProperty Name="MemberCount" ColumnName="MemberCount" />
+                <ScalarProperty Name="ChildCount" ColumnName="ChildCount" />
+                <ScalarProperty Name="AVGChildCount" ColumnName="AVGChildCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Manage_Dashboard_Member_Age" FunctionName="HeraModel.Store.sp_Manage_Dashboard_Member_Age">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Manage_Dashboard_Member_Age_Result">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="SubTotalAge" ColumnName="SubTotalAge" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CMS_Content_Detail_Log">
+            <EntityTypeMapping TypeName="HeraModel.CMS_Content_Detail_Log">
+              <MappingFragment StoreEntitySet="CMS_Content_Detail_Log">
+                <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+                <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+                <ScalarProperty Name="ContentDetailId" ColumnName="ContentDetailId" />
+                <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Notification_Job_ChildVaccinate" FunctionName="HeraModel.Store.sp_Notification_Job_ChildVaccinate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeraModel.sp_Notification_Job_ChildVaccinate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ReminderTitle" ColumnName="ReminderTitle" />
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="NotificationUserId" ColumnName="NotificationUserId" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

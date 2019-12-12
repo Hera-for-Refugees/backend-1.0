@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9945d93e6639451f921dea40f2c174be" Name="Diagram1">
+        <EntityTypeShape EntityType="HeraModel.App_Screen" Width="1.5" PointX="3.75" PointY="4.75" />
+        <EntityTypeShape EntityType="HeraModel.App_Screen_Category" Width="1.5" PointX="1.5" PointY="4.875" />
+        <EntityTypeShape EntityType="HeraModel.App_Screen_Text" Width="1.5" PointX="6" PointY="7.5" />
+        <EntityTypeShape EntityType="HeraModel.Category" Width="1.5" PointX="8.75" PointY="16.5" />
+        <EntityTypeShape EntityType="HeraModel.Category_Media" Width="1.5" PointX="16" PointY="16.5" />
+        <EntityTypeShape EntityType="HeraModel.Category_Question" Width="1.5" PointX="8.75" PointY="2.125" />
+        <EntityTypeShape EntityType="HeraModel.Category_Question_Answer" Width="1.5" PointX="14" PointY="4.625" />
+        <EntityTypeShape EntityType="HeraModel.CMS_Content" Width="1.5" PointX="0.75" PointY="15.5" />
+        <EntityTypeShape EntityType="HeraModel.CMS_Content_Detail" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="HeraModel.Health_Center" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HeraModel.Member" Width="1.5" PointX="8.75" PointY="9.375" />
+        <EntityTypeShape EntityType="HeraModel.Member_Child" Width="1.5" PointX="11" PointY="25.5" />
+        <EntityTypeShape EntityType="HeraModel.Member_Child_Vaccinate" Width="1.5" PointX="13.25" PointY="17" />
+        <EntityTypeShape EntityType="HeraModel.Member_Health_Record" Width="1.5" PointX="11" PointY="18.75" />
+        <EntityTypeShape EntityType="HeraModel.Member_Notification" Width="1.5" PointX="14" PointY="11.125" />
+        <EntityTypeShape EntityType="HeraModel.Member_Notification_Log" Width="1.5" PointX="11" PointY="14.5" />
+        <EntityTypeShape EntityType="HeraModel.Member_Pregnancy" Width="1.5" PointX="11" PointY="21.625" />
+        <EntityTypeShape EntityType="HeraModel.Member_Question_Answer" Width="1.5" PointX="11" PointY="9.875" />
+        <EntityTypeShape EntityType="HeraModel.Notification" Width="1.5" PointX="3.75" PointY="19.25" />
+        <EntityTypeShape EntityType="HeraModel.Notification_Message" Width="1.5" PointX="6" PointY="11.5" />
+        <EntityTypeShape EntityType="HeraModel.Notification_Sent" Width="1.5" PointX="11.75" PointY="6.375" />
+        <EntityTypeShape EntityType="HeraModel.Notification_Sent_Detail" Width="1.5" PointX="3" PointY="25.875" />
+        <EntityTypeShape EntityType="HeraModel.SLanguage" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="HeraModel.SLocation_City" Width="1.5" PointX="13" PointY="0.875" />
+        <EntityTypeShape EntityType="HeraModel.SLocation_Country" Width="1.5" PointX="10.75" PointY="0.875" />
+        <EntityTypeShape EntityType="HeraModel.SLocation_Region" Width="1.5" PointX="15.25" PointY="1.125" />
+        <EntityTypeShape EntityType="HeraModel.SResource" Width="1.5" PointX="3" PointY="28.625" />
+        <EntityTypeShape EntityType="HeraModel.SType_Data" Width="1.5" PointX="11.75" PointY="29.125" />
+        <EntityTypeShape EntityType="HeraModel.SType_Media" Width="1.5" PointX="13.75" PointY="21.625" />
+        <EntityTypeShape EntityType="HeraModel.SType_Menu" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HeraModel.SType_Notification" Width="1.5" PointX="1.5" PointY="19.875" />
+        <EntityTypeShape EntityType="HeraModel.SType_QuestionAnswer" Width="1.5" PointX="6.5" PointY="3.125" />
+        <EntityTypeShape EntityType="HeraModel.SType_Table" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HeraModel.SUser" Width="1.5" PointX="5.75" PointY="14.75" />
+        <EntityTypeShape EntityType="HeraModel.Translation" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="HeraModel.Vaccinate" Width="1.5" PointX="1.5" PointY="32.875" />
+        <EntityTypeShape EntityType="HeraModel.Vaccinate_Detail" Width="1.5" PointX="0.75" PointY="22.625" />
+        <EntityTypeShape EntityType="HeraModel.Vaccinate_Message" Width="1.5" PointX="3" PointY="15.5" />
+        <AssociationConnector Association="HeraModel.FK_App_Screen_App_Screen_Category" />
+        <AssociationConnector Association="HeraModel.FK_App_Screen_Text_App_Screen" />
+        <AssociationConnector Association="HeraModel.FK_App_Screen_Text_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_Category_Media_Category" />
+        <AssociationConnector Association="HeraModel.FK_Category_Question_Category" />
+        <AssociationConnector Association="HeraModel.FK_Member_Question_Answer_Category" />
+        <AssociationConnector Association="HeraModel.FK_Category_Media_SType_Media" />
+        <AssociationConnector Association="HeraModel.FK_Category_Question_Answer_Category_Question" />
+        <AssociationConnector Association="HeraModel.FK_Category_Question_SType_QuestionAnswer" />
+        <AssociationConnector Association="HeraModel.FK_Member_Question_Answer_Category_Question" />
+        <AssociationConnector Association="HeraModel.FK_Category_Question_Answer_SType_Data" />
+        <AssociationConnector Association="HeraModel.FK_CMS_Content_Detail_CMS_Content" />
+        <AssociationConnector Association="HeraModel.FK_CMS_Content_Detail_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_Member_Child_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Child_Vaccinate_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Health_Record_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Notification_Log_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Notification_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Pregnancy_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Question_Answer_Member" />
+        <AssociationConnector Association="HeraModel.FK_Member_Child_Vaccinate_Member_Child" />
+        <AssociationConnector Association="HeraModel.FK_Member_Notification_Notification_Sent" />
+        <AssociationConnector Association="HeraModel.FK_Member_Notification_Log_Notification" />
+        <AssociationConnector Association="HeraModel.FK_Member_Notification_Log_SType_Notification" />
+        <AssociationConnector Association="HeraModel.FK_Notification_Message_Notification" />
+        <AssociationConnector Association="HeraModel.FK_Notification_SType_Notification" />
+        <AssociationConnector Association="HeraModel.FK_Notification_Message_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_Notification_Sent_Detail_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_SResource_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_Translation_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_Vaccinate_Message_SLanguage" />
+        <AssociationConnector Association="HeraModel.FK_SLocation_City_SLocation_Country" />
+        <AssociationConnector Association="HeraModel.FK_SLocation_Region_SLocation_City" />
+        <AssociationConnector Association="HeraModel.FK_Translation_SType_Table" />
+        <AssociationConnector Association="HeraModel.FK_Vaccinate_Detail_Vaccinate" />
+        <AssociationConnector Association="HeraModel.FK_Vaccinate_Message_Vaccinate_Detail" />
+        <EntityTypeShape EntityType="HeraModel.CMS_Content_Detail_Log" Width="1.5" PointX="17" PointY="12.375" />
+        <AssociationConnector Association="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content" />
+        <AssociationConnector Association="HeraModel.FK_CMS_Content_Detail_Log_CMS_Content_Detail" />
+        <AssociationConnector Association="HeraModel.FK_CMS_Content_Detail_Log_Member" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
